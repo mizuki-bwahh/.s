@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Madokadex</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      background: linear-gradient(180deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+      font-family: 'Fredoka One', cursive;
+      overflow-x: hidden;
+    }
+
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 30px;
+      background: linear-gradient(180deg, rgba(26, 26, 46, 0.95) 0%, rgba(26, 26, 46, 0.8) 100%);
+      backdrop-filter: blur(10px);
+      z-index: 999;
+      border: 2px solid #ff0080;
+      box-shadow: 0 0 20px rgba(255, 0, 128, 0.3);
+    }
+
+    .nav-logo {
+      font-size: 1.5rem;
+      color: #fff;
+      text-decoration: none;
+      text-shadow: 0 0 10px #ff0080;
+      animation: logoPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes logoPulse {
+      0%, 100% { text-shadow: 0 0 10px #ff0080; }
+      50% { text-shadow: 0 0 20px #ff1493, 0 0 30px #ff0080; }
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 30px;
+    }
+
+    .nav-links a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 1rem;
+      padding: 8px 20px;
+      border-radius: 25px;
+      background: linear-gradient(45deg, transparent, rgba(255, 0, 128, 0.3), transparent);
+      border: 1px solid transparent;
+      transition: all 0.3s ease;
+      text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+    }
+
+    .nav-links a:hover {
+      background: linear-gradient(45deg, #ff0080, #ff1493);
+      border-color: #ff1493;
+      box-shadow: 0 0 15px rgba(255, 0, 128, 0.5);
+      transform: scale(1.05);
+    }
+
+    .main-content {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      width: 100%;
+    }
+
+    .hero {
+      order: 1;
+      min-height: 100vh;
+      display: flex;
+      flex-shrink: 0;
+      align-self: flex-start;
+      width: 100%;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 60px;
+    }
+
+    .title {
+      font-size: 5rem;
+      color: #fff;
+      text-shadow: 
+        0 0 5px #ff0080,
+        0 0 10px #ff0080,
+        2px 2px 0 #c71585;
+      animation: titleFloat 3s ease-in-out infinite;
+      letter-spacing: 4px;
+    }
+
+    .title span {
+      display: inline-block;
+      animation: letterWobble 2s ease-in-out infinite;
+    }
+
+    .title span:nth-child(1) { animation-delay: 0s; }
+    .title span:nth-child(2) { animation-delay: 0.15s; }
+    .title span:nth-child(3) { animation-delay: 0.3s; }
+    .title span:nth-child(4) { animation-delay: 0.45s; }
+    .title span:nth-child(5) { animation-delay: 0.6s; }
+    .title span:nth-child(6) { animation-delay: 0.75s; }
+    .title span:nth-child(7) { animation-delay: 0.9s; }
+    .title span:nth-child(8) { animation-delay: 1.05s; }
+    .title span:nth-child(9) { animation-delay: 1.2s; }
+
+    @keyframes letterWobble {
+      0%, 100% { transform: rotate(0deg); }
+      25% { transform: rotate(-3deg) translateY(-2px); }
+      75% { transform: rotate(3deg) translateY(-2px); }
+    }
+
+    @keyframes titleFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+    }
+
+    .btn {
+      position: relative;
+      padding: 20px 45px;
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: #fff;
+      background: linear-gradient(45deg, #ff0080, #ff6b9d, #c71585, #ff1493);
+      background-size: 300% 300%;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 10px 30px rgba(255, 0, 128, 0.4);
+      animation: gradientMove 3s ease infinite;
+      font-family: 'Fredoka One', cursive;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 60%);
+      transform: scale(0);
+      transition: transform 0.6s ease;
+    }
+
+    .btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 15px 40px rgba(255, 0, 128, 0.6);
+    }
+
+    .btn:hover::before {
+      transform: scale(1);
+    }
+
+    .btn:active {
+      transform: scale(0.95);
+    }
+
+    .btn span {
+      position: relative;
+      z-index: 1;
+    }
+
+    .scroll-text {
+      font-size: 1.2rem;
+      color: rgba(255, 255, 255, 0.5);
+      animation: fadePulse 2s ease-in-out infinite;
+    }
+
+    @keyframes fadePulse {
+      0%, 100% { opacity: 0.3; transform: translateY(0); }
+      50% { opacity: 0.7; transform: translateY(5px); }
+    }
+
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .carousel-section {
+      order: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin-top: 50px;
+      padding-bottom: 50px;
+      flex-shrink: 0;
+      gap: 20px;
+    }
+
+    .carousel-title {
+      font-size: 2.5rem;
+      color: #fff;
+      text-shadow: 
+        0 0 5px #ff0080,
+        0 0 10px #ff0080,
+        2px 2px 0 #c71585;
+    }
+
+    .carousel {
+      position: relative;
+      width: 500px;
+      max-width: 90vw;
+    }
+
+    .carousel-track-container {
+      position: relative;
+      overflow: hidden;
+      border-radius: 15px;
+    }
+
+    .carousel-track {
+      position: relative;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .carousel-slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .carousel-slide.current-slide {
+      opacity: 1;
+      position: relative;
+    }
+
+    .carousel-slide img {
+      width: 100%;
+      border-radius: 15px;
+      display: block;
+    }
+
+    .carousel-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255, 0, 128, 0.7);
+      border: none;
+      color: #fff;
+      font-size: 2rem;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      cursor: pointer;
+      z-index: 10;
+      transition: background 0.3s ease, transform 0.3s ease;
+    }
+
+    .carousel-arrow:hover {
+      background: rgba(255, 0, 128, 1);
+      transform: translateY(-50%) scale(1.1);
+    }
+
+    .left-arrow {
+      left: -25px;
+    }
+
+    .right-arrow {
+      right: -25px;
+    }
+
+    .sparkles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    .sparkle {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background: #ff69b4;
+      border-radius: 50%;
+      animation: sparkleFloat 4s ease-in-out infinite;
+      opacity: 0;
+    }
+
+    .sparkle:nth-child(1) { left: 10%; animation-delay: 0s; }
+    .sparkle:nth-child(2) { left: 20%; animation-delay: 0.5s; }
+    .sparkle:nth-child(3) { left: 30%; animation-delay: 1s; }
+    .sparkle:nth-child(4) { left: 40%; animation-delay: 1.5s; }
+    .sparkle:nth-child(5) { left: 50%; animation-delay: 2s; }
+    .sparkle:nth-child(6) { left: 60%; animation-delay: 2.5s; }
+    .sparkle:nth-child(7) { left: 70%; animation-delay: 3s; }
+    .sparkle:nth-child(8) { left: 80%; animation-delay: 3.5s; }
+    .sparkle:nth-child(9) { left: 90%; animation-delay: 0.25s; }
+    .sparkle:nth-child(10) { left: 15%; animation-delay: 0.75s; }
+    .sparkle:nth-child(11) { left: 35%; animation-delay: 1.25s; }
+    .sparkle:nth-child(12) { left: 55%; animation-delay: 1.75s; }
+    .sparkle:nth-child(13) { left: 75%; animation-delay: 2.25s; }
+    .sparkle:nth-child(14) { left: 85%; animation-delay: 2.75s; }
+    .sparkle:nth-child(15) { left: 25%; animation-delay: 3.25s; }
+
+    @keyframes sparkleFloat {
+      0% { transform: translateY(100vh) scale(0); opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { transform: translateY(-100px) scale(1); opacity: 0; }
+    }
+
+    @media (max-width: 600px) {
+      .title {
+        font-size: 2.5rem;
+        text-align: center;
+      }
+
+      .btn {
+        padding: 15px 30px;
+        font-size: 1rem;
+      }
+
+      .scroll-text {
+        font-size: 1rem;
+      }
+
+      .carousel {
+        width: 90vw;
+      }
+
+      .carousel-arrow {
+        width: 35px;
+        height: 35px;
+        font-size: 1.5rem;
+      }
+
+      .carousel-title {
+        font-size: 1.8rem;
+        text-align: center;
+      }
+
+      .nav-links {
+        gap: 15px;
+      }
+
+      .nav-links a {
+        font-size: 0.8rem;
+        padding: 6px 15px;
+      }
+
+      .nav-logo {
+        font-size: 1.2rem;
+      }
+
+      .left-arrow {
+        left: -15px;
+      }
+
+      .right-arrow {
+        right: -15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <a href="#" class="nav-logo">Madokadex</a>
+    <div class="nav-links">
+      <a href="https://discord.com/oauth2/authorize?client_id=1494136822018609296&permissions=380104722432&integration_type=0&scope=bot" target="_blank">Add Bot</a>
+      <a href="#community">Community</a>
+    </div>
+  </nav>
+
+  <div class="sparkles">
+    <div class="sparkle"></div>
+    <div class="sparkle"></div>
+    <div class="sparkle"></div>
+    <div class="sparkle"></div>
+    <div class="sparkle"></div>
+    <div class="sparkle"></div>
+    <div class="sparkle"></div>
+    <div class="sparkle"></div>
+    <div class="sparkle"></div>
+    <div class="sparkle"></div>
+    <div class="sparkle"></div>
+    <div class="sparkle"></div>
+    <div class="sparkle"></div>
+    <div class="sparkle"></div>
+    <div class="sparkle"></div>
+  </div>
+
+  <div class="main-content">
+    <section class="hero">
+      <h1 class="title">
+        <span>M</span><span>a</span><span>d</span><span>o</span><span>k</span><span>a</span><span>d</span><span>e</span><span>x</span>
+      </h1>
+
+      <a href="https://discord.com/oauth2/authorize?client_id=1494136822018609296&permissions=380104722432&integration_type=0&scope=bot" class="btn" target="_blank" rel="noopener noreferrer"><span>Add the Bot to your<br>Discord server <3</span></a>
+
+      <p class="scroll-text">scroll down :3</p>
+    </section>
+
+    <div id="community" class="carousel-section">
+      <h2 class="carousel-title">our community <3</h2>
+
+      <div class="carousel">
+        <button class="carousel-arrow left-arrow" id="prevBtn">&#10094;</button>
+        <div class="carousel-track-container">
+          <ul class="carousel-track">
+            <li class="carousel-slide current-slide">
+              <img src="screenshot.png" alt="Screenshot 1">
+            </li>
+            <li class="carousel-slide">
+              <img src="screenshot.png" alt="Screenshot 2">
+            </li>
+          </ul>
+        </div>
+        <button class="carousel-arrow right-arrow" id="nextBtn">&#10095;</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const track = document.querySelector('.carousel-track');
+    const slides = Array.from(track.querySelectorAll('.carousel-slide'));
+    const nextBtn = document.getElementById('nextBtn');
+    const prevBtn = document.getElementById('prevBtn');
+    let currentSlide = 0;
+
+    function updateSlides() {
+      slides.forEach((slide, index) => {
+        slide.classList.toggle('current-slide', index === currentSlide);
+      });
+    }
+
+    nextBtn.addEventListener('click', () => {
+      currentSlide = (currentSlide + 1) % slides.length;
+      updateSlides();
+    });
+
+    prevBtn.addEventListener('click', () => {
+      currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+      updateSlides();
+    });
+  </script>
+</body>
+</html>
