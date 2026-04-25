@@ -433,7 +433,7 @@
       <div class="button-container">
         <a href="https://discord.com/oauth2/authorize?client_id=1494136822018609296&permissions=380104722432&integration_type=0&scope=bot" class="btn" target="_blank" rel="noopener noreferrer"><span>Add the Bot to your<br>Discord server <3</span></a>
 
-        <a href="https://discord.com/oauth2/authorize?client_id=1494136822018609296&permissions=0&scope=identify%20email" class="btn" target="_blank" rel="noopener noreferrer"><span>Log in with<br>Discord</span></a>
+        <button class="btn" onclick="loginWithDiscord()"><span>Log in with<br>Discord</span></button>
       </div>
 
       <p class="scroll-text">scroll down :3</p>
@@ -460,6 +460,22 @@
   </div>
 
   <script>
+    function loginWithDiscord() {
+      const authUrl = 'https://discord.com/api/oauth2/authorize?client_id=1494136822018609296&redirect_uri=https%3A%2F%2Fmadokadex.netlify.app%2F.netlify%2Ffunctions%2Fauth-callback&response_type=code&scope=identify%20email';
+      const width = 500;
+      const height = 700;
+      const left = window.screenX + (window.outerWidth - width) / 2;
+      const top = window.screenY + (window.outerHeight - height) / 2;
+      window.open(authUrl, 'discord-login', `width=${width},height=${height},left=${left},top=${top}`);
+    }
+
+    window.addEventListener('message', function(event) {
+      if (event.data.type === 'DISCORD_AUTH') {
+        console.log('Logged in user:', event.data.user);
+        alert('Welcome, ' + event.data.user.username + '!');
+      }
+    });
+
     const track = document.querySelector('.carousel-track');
     const slides = Array.from(track.querySelectorAll('.carousel-slide'));
     const nextBtn = document.getElementById('nextBtn');
