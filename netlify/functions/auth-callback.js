@@ -1,8 +1,6 @@
-const fetch = require('node-fetch');
-
 const CLIENT_ID = process.env.DISCORD_CLIENT_ID;
 const CLIENT_SECRET = process.env.DISCORD_CLIENT_SECRET;
-const REDIRECT_URI = 'https://madokadex.netlify.app/.netlify/functions/auth/callback';
+const REDIRECT_URI = 'https://madokadex.netlify.app/.netlify/functions/auth-callback';
 
 exports.handler = async (event, context) => {
   const code = event.queryStringParameters.code;
