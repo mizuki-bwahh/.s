@@ -44,6 +44,22 @@
       box-shadow: 0 0 20px rgba(255, 0, 128, 0.3);
     }
 
+    .hamburger {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 10px;
+    }
+
+    .hamburger span {
+      width: 25px;
+      height: 3px;
+      background: #fff;
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+
     .nav-logo {
       font-size: 1.5rem;
       color: #fff;
@@ -79,6 +95,90 @@
       border-color: #ff1493;
       box-shadow: 0 0 15px rgba(255, 0, 128, 0.5);
       transform: scale(1.05);
+    }
+
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: -300px;
+      width: 300px;
+      height: 100vh;
+      background: linear-gradient(180deg, rgba(26, 26, 46, 0.98) 0%, rgba(22, 33, 62, 0.98) 100%);
+      border-right: 2px solid #ff0080;
+      box-shadow: 0 0 30px rgba(255, 0, 128, 0.3);
+      z-index: 1001;
+      transition: left 0.3s ease;
+      padding-top: 80px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sidebar.open {
+      left: 0;
+    }
+
+    .sidebar-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+      display: none;
+    }
+
+    .sidebar-overlay.open {
+      display: block;
+    }
+
+    .sidebar .close-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 2rem;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    .sidebar a {
+      display: block;
+      color: #fff;
+      text-decoration: none;
+      padding: 20px 30px;
+      font-size: 1.3rem;
+      border-bottom: 1px solid rgba(255, 0, 128, 0.2);
+      transition: all 0.3s ease;
+      text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+    }
+
+    .sidebar a:hover, .sidebar a.active {
+      background: rgba(255, 0, 128, 0.2);
+      padding-left: 40px;
+    }
+
+    .sidebar .user-section {
+      margin-top: auto;
+      padding: 20px 30px;
+      border-top: 2px solid #ff0080;
+    }
+
+    .sidebar .avatar {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: linear-gradient(45deg, #ff0080, #ff1493);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      color: #fff;
+      margin-bottom: 10px;
+    }
+
+    .sidebar .username {
+      font-size: 1rem;
+      color: #fff;
     }
 
     .main-content {
@@ -338,125 +438,6 @@
       100% { transform: translateY(-100px) scale(1); opacity: 0; }
     }
 
-    body.logged-in .guest-navbar {
-      display: none;
-    }
-
-    body.logged-in .guest-content {
-      display: none;
-    }
-
-    body.logged-in .logged-in-sidebar {
-      display: flex;
-    }
-
-    body.logged-in .logged-in-content {
-      display: block;
-    }
-
-    body.logged-in .login-btn-container {
-      display: none;
-    }
-
-    .logged-in-sidebar {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 80px;
-      height: 100vh;
-      background: linear-gradient(180deg, rgba(26, 26, 46, 0.98) 0%, rgba(22, 33, 62, 0.98) 100%);
-      border-right: 2px solid #ff0080;
-      box-shadow: 0 0 30px rgba(255, 0, 128, 0.3);
-      flex-direction: column;
-      align-items: center;
-      padding: 20px 0;
-      gap: 20px;
-      z-index: 1000;
-    }
-
-    .logged-in-sidebar .nav-logo-small {
-      font-size: 1rem;
-      color: #fff;
-      text-decoration: none;
-      text-shadow: 0 0 10px #ff0080;
-      writing-mode: vertical-rl;
-      text-orientation: mixed;
-      transform: rotate(180deg);
-      margin-bottom: 20px;
-    }
-
-    .logged-in-sidebar a {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      color: #fff;
-      text-decoration: none;
-      background: rgba(255, 0, 128, 0.2);
-      border: 1px solid rgba(255, 0, 128, 0.3);
-      transition: all 0.3s ease;
-      font-size: 0.8rem;
-      text-align: center;
-    }
-
-    .logged-in-sidebar a:hover, .logged-in-sidebar a.active {
-      background: linear-gradient(45deg, #ff0080, #ff1493);
-      border-color: #ff1493;
-      box-shadow: 0 0 15px rgba(255, 0, 128, 0.5);
-      transform: scale(1.1);
-    }
-
-    .logged-in-sidebar .user-info {
-      margin-top: auto;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .logged-in-sidebar .avatar {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background: linear-gradient(45deg, #ff0080, #ff1493);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.2rem;
-      color: #fff;
-      border: 2px solid #ff0080;
-    }
-
-    .logged-in-sidebar .username {
-      writing-mode: vertical-rl;
-      text-orientation: mixed;
-      transform: rotate(180deg);
-      font-size: 0.8rem;
-      color: #fff;
-      max-width: 60px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .logged-in-content {
-      display: none;
-      margin-left: 80px;
-      min-height: 100vh;
-      padding: 20px;
-    }
-
-    .logged-in-content .hero-section {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 40px;
-    }
-
     @media (max-width: 600px) {
       .title {
         font-size: 2.5rem;
@@ -507,24 +488,6 @@
       .right-arrow {
         right: -15px;
       }
-
-      body.logged-in .logged-in-sidebar {
-        width: 60px;
-      }
-
-      body.logged-in .logged-in-content {
-        margin-left: 60px;
-      }
-
-      .logged-in-sidebar a {
-        width: 40px;
-        height: 40px;
-        font-size: 0.7rem;
-      }
-
-      .logged-in-sidebar .username {
-        display: none;
-      }
     }
   </style>
 </head>
@@ -547,25 +510,31 @@
     <div class="sparkle"></div>
   </div>
 
-  <nav class="navbar guest-navbar">
-    <a href="#" class="nav-logo">Madokadex</a>
-    <div class="nav-links">
-      <a href="page.html">Page</a>
-    </div>
-  </nav>
-
-  <div class="logged-in-sidebar">
-    <a href="#" class="nav-logo-small">Madokadex</a>
-    <a href="#home" class="active">Home</a>
+  <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+  <div class="sidebar" id="sidebar">
+    <span class="close-btn" onclick="closeSidebar()">&times;</span>
+    <a href="index.html" class="active">Home</a>
     <a href="page.html">Page</a>
-    <a href="#community">Community</a>
-    <div class="user-info">
+    <a href="community.html">Community</a>
+    <div class="user-section" id="userSection" style="display: none;">
       <div class="avatar" id="avatar">?</div>
       <div class="username" id="sidebar-username">...</div>
     </div>
   </div>
 
-  <div class="main-content guest-content">
+  <nav class="navbar">
+    <div class="hamburger" onclick="openSidebar()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <a href="index.html" class="nav-logo">Madokadex</a>
+    <div class="nav-links">
+      <a href="page.html">Page</a>
+    </div>
+  </nav>
+
+  <div class="main-content">
     <section class="hero">
       <h1 class="title">
         <span>M</span><span>a</span><span>d</span><span>o</span><span>k</span><span>a</span><span>d</span><span>e</span><span>x</span>
@@ -574,7 +543,7 @@
       <div class="button-container">
         <a href="https://discord.com/oauth2/authorize?client_id=1494136822018609296&permissions=380104722432&integration_type=0&scope=bot" class="btn" target="_blank" rel="noopener noreferrer"><span>Add the Bot to your<br>Discord server <3</span></a>
 
-        <button class="btn login-btn-container" onclick="loginWithDiscord()"><span>Log in with<br>Discord</span></button>
+        <button class="btn" onclick="loginWithDiscord()" id="loginBtn"><span>Log in with<br>Discord</span></button>
       </div>
 
       <p class="scroll-text">scroll down :3</p>
@@ -600,36 +569,17 @@
     </div>
   </div>
 
-  <div class="logged-in-content">
-    <section class="hero-section">
-      <h1 class="title">
-        <span>W</span><span>e</span><span>l</span><span>c</span><span>o</span><span>m</span><span>e</span><span>,</span>
-      </h1>
-      <p style="color: #fff; font-size: 2rem; text-shadow: 0 0 10px #ff0080;" id="logged-in-welcome"></p>
-      <a href="https://discord.com/oauth2/authorize?client_id=1494136822018609296&permissions=380104722432&integration_type=0&scope=bot" class="btn" target="_blank" rel="noopener noreferrer"><span>Add the Bot to your<br>Discord server <3</span></a>
-    </section>
-
-    <section id="community" style="display: flex; flex-direction: column; align-items: center; padding: 40px 20px;">
-      <h2 class="carousel-title">our community <3</h2>
-
-      <div class="carousel">
-        <button class="carousel-arrow left-arrow" id="prevBtn2">&#10094;</button>
-        <div class="carousel-track-container">
-          <ul class="carousel-track">
-            <li class="carousel-slide current-slide">
-              <img src="screenshot.png" alt="Screenshot 1">
-            </li>
-            <li class="carousel-slide">
-              <img src="screenshot.png" alt="Screenshot 2">
-            </li>
-          </ul>
-        </div>
-        <button class="carousel-arrow right-arrow" id="nextBtn2">&#10095;</button>
-      </div>
-    </section>
-  </div>
-
   <script>
+    function openSidebar() {
+      document.getElementById('sidebar').classList.add('open');
+      document.getElementById('sidebarOverlay').classList.add('open');
+    }
+
+    function closeSidebar() {
+      document.getElementById('sidebar').classList.remove('open');
+      document.getElementById('sidebarOverlay').classList.remove('open');
+    }
+
     function loginWithDiscord() {
       const authUrl = 'https://discord.com/api/oauth2/authorize?client_id=1494136822018609296&redirect_uri=https%3A%2F%2Fmadokadex.netlify.app%2F.netlify%2Ffunctions%2Fauth-callback&response_type=code&scope=identify%20email';
       const width = 500;
@@ -649,11 +599,11 @@
     function checkLogin() {
       const user = JSON.parse(localStorage.getItem('discord_user'));
       if (user) {
-        document.body.classList.add('logged-in');
         const initial = user.username.charAt(0).toUpperCase();
         document.getElementById('avatar').textContent = initial;
         document.getElementById('sidebar-username').textContent = user.username;
-        document.getElementById('logged-in-welcome').textContent = user.username + '!';
+        document.getElementById('userSection').style.display = 'block';
+        document.getElementById('loginBtn').style.display = 'none';
       }
     }
 
@@ -681,32 +631,6 @@
         currentSlide = (currentSlide - 1 + slides.length) % slides.length;
         updateSlides();
       });
-    }
-
-    const track2 = document.querySelectorAll('.carousel-track')[1];
-    if (track2) {
-      const slides2 = Array.from(track2.querySelectorAll('.carousel-slide'));
-      const nextBtn2 = document.getElementById('nextBtn2');
-      const prevBtn2 = document.getElementById('prevBtn2');
-      let currentSlide2 = 0;
-
-      function updateSlides2() {
-        slides2.forEach((slide, index) => {
-          slide.classList.toggle('current-slide', index === currentSlide2);
-        });
-      }
-
-      if (nextBtn2 && prevBtn2) {
-        nextBtn2.addEventListener('click', () => {
-          currentSlide2 = (currentSlide2 + 1) % slides2.length;
-          updateSlides2();
-        });
-
-        prevBtn2.addEventListener('click', () => {
-          currentSlide2 = (currentSlide2 - 1 + slides2.length) % slides2.length;
-          updateSlides2();
-        });
-      }
     }
   </script>
 </body>
