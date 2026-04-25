@@ -430,13 +430,13 @@
         <span>M</span><span>a</span><span>d</span><span>o</span><span>k</span><span>a</span><span>d</span><span>e</span><span>x</span>
       </h1>
 
-      <div class="button-container">
+<div class="button-container">
         <a href="https://discord.com/oauth2/authorize?client_id=1494136822018609296&permissions=380104722432&integration_type=0&scope=bot" class="btn" target="_blank" rel="noopener noreferrer"><span>Add the Bot to your<br>Discord server <3</span></a>
 
         <button class="btn" onclick="loginWithDiscord()"><span>Log in with<br>Discord</span></button>
       </div>
 
-      <p class="scroll-text">scroll down :3</p>
+      <p id="welcome" style="display: none; color: #fff; font-size: 1.5rem; text-shadow: 0 0 10px #ff0080;"></p>
     </section>
 
     <div id="community" class="carousel-section">
@@ -472,7 +472,9 @@
     window.addEventListener('message', function(event) {
       if (event.data.type === 'DISCORD_AUTH') {
         console.log('Logged in user:', event.data.user);
-        alert('Welcome, ' + event.data.user.username + '!');
+        const welcomeEl = document.getElementById('welcome');
+        welcomeEl.textContent = 'Welcome, ' + event.data.user.username + '!';
+        welcomeEl.style.display = 'block';
       }
     });
 
