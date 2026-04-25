@@ -544,6 +544,12 @@
         <button class="btn" onclick="loginWithDiscord()" id="loginBtn"><span>Log in with<br>Discord</span></button>
       </div>
 
+      <div class="button-container" id="loggedInButtons" style="display: none;">
+        <a href="https://discord.com/oauth2/authorize?client_id=1494136822018609296&permissions=380104722432&integration_type=0&scope=bot" class="btn" target="_blank" rel="noopener noreferrer"><span>Add the Bot to your<br>Discord server <3</span></a>
+
+        <a href="https://discord.gg/crKYKAbY2P" class="btn" target="_blank" rel="noopener noreferrer"><span>Support<br>Server</span></a>
+      </div>
+
       <p class="scroll-text">scroll down :3</p>
     </section>
   </div>
@@ -582,7 +588,8 @@
         document.getElementById('avatar').textContent = initial;
         document.getElementById('sidebar-username').textContent = user.username;
         document.getElementById('userSection').style.display = 'block';
-        document.getElementById('loginBtn').style.display = 'none';
+        document.getElementById('loginBtn').parentElement.style.display = 'none';
+        document.getElementById('loggedInButtons').style.display = 'flex';
       }
     }
 
