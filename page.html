@@ -21,10 +21,7 @@
       background: linear-gradient(180deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
       font-family: 'Fredoka One', cursive;
       overflow-x: hidden;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding-top: 100px;
+      padding-top: 80px;
     }
 
     .navbar {
@@ -73,11 +70,86 @@
       text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
     }
 
-    .nav-links a:hover {
+    .nav-links a:hover, .nav-links a.active {
       background: linear-gradient(45deg, #ff0080, #ff1493);
       border-color: #ff1493;
       box-shadow: 0 0 15px rgba(255, 0, 128, 0.5);
       transform: scale(1.05);
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 10px;
+    }
+
+    .hamburger span {
+      width: 25px;
+      height: 3px;
+      background: #fff;
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+
+    .sidebar {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: -250px;
+      width: 250px;
+      height: 100vh;
+      background: linear-gradient(180deg, rgba(26, 26, 46, 0.98) 0%, rgba(22, 33, 62, 0.98) 100%);
+      z-index: 1001;
+      padding-top: 80px;
+      transition: left 0.3s ease;
+      border-right: 2px solid #ff0080;
+      box-shadow: 0 0 30px rgba(255, 0, 128, 0.3);
+    }
+
+    .sidebar.open {
+      left: 0;
+      display: block;
+    }
+
+    .sidebar-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+    }
+
+    .sidebar-overlay.open {
+      display: block;
+    }
+
+    .sidebar a {
+      display: block;
+      color: #fff;
+      text-decoration: none;
+      padding: 15px 30px;
+      font-size: 1.2rem;
+      border-bottom: 1px solid rgba(255, 0, 128, 0.2);
+      transition: all 0.3s ease;
+    }
+
+    .sidebar a:hover {
+      background: rgba(255, 0, 128, 0.2);
+      padding-left: 40px;
+    }
+
+    .sidebar .close-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 2rem;
+      color: #fff;
+      cursor: pointer;
     }
 
     .content {
@@ -161,8 +233,12 @@
         font-size: 1.2rem;
       }
 
+      .hamburger {
+        display: flex;
+      }
+
       .nav-links {
-        gap: 15px;
+        display: none;
       }
 
       .nav-links a {
@@ -177,13 +253,6 @@
   </style>
 </head>
 <body>
-  <nav class="navbar">
-    <a href="index.html" class="nav-logo">Madokadex</a>
-    <div class="nav-links">
-      <a href="page.html">Page</a>
-    </div>
-  </nav>
-
   <div class="sparkles">
     <div class="sparkle"></div>
     <div class="sparkle"></div>
@@ -202,9 +271,45 @@
     <div class="sparkle"></div>
   </div>
 
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+  <div class="sidebar" id="sidebar">
+    <span class="close-btn" onclick="closeSidebar()">&times;</span>
+    <a href="index.html">Home</a>
+    <a href="page.html" class="active">Page</a>
+    <a href="community.html">Community</a>
+  </div>
+
+  <nav class="navbar">
+    <div class="hamburger" onclick="openSidebar()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <a href="index.html" class="nav-logo">Madokadex</a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="page.html" class="active">Page</a>
+      <a href="community.html">Community</a>
+    </div>
+  </nav>
+
   <div class="content">
     <h1>This is a test page!</h1>
     <p>Welcome to the test page of Madokadex.<br>This is where all the magic happens~</p>
   </div>
+
+  <script>
+    function openSidebar() {
+      document.getElementById('sidebar').classList.add('open');
+      document.getElementById('sidebarOverlay').classList.add('open');
+    }
+
+    function closeSidebar() {
+      document.getElementById('sidebar').classList.remove('open');
+      document.getElementById('sidebarOverlay').classList.remove('open');
+    }
+
+    document.getElementById('sidebarOverlay').addEventListener('click', closeSidebar);
+  </script>
 </body>
 </html>
