@@ -528,10 +528,8 @@
       <span></span>
       <span></span>
     </div>
-    <a href="index.html" class="nav-logo">Madokadex</a>
-    <div class="nav-links">
-      <a href="page.html">Page</a>
-    </div>
+    <a href="index.html" class="nav-logo" style="position: absolute; left: 50%; transform: translateX(-50%);">Madokadex</a>
+    <div style="width: 50px;"></div>
   </nav>
 
   <div class="main-content">
@@ -548,25 +546,6 @@
 
       <p class="scroll-text">scroll down :3</p>
     </section>
-
-    <div id="community" class="carousel-section">
-      <h2 class="carousel-title">our community <3</h2>
-
-      <div class="carousel">
-        <button class="carousel-arrow left-arrow" id="prevBtn">&#10094;</button>
-        <div class="carousel-track-container">
-          <ul class="carousel-track">
-            <li class="carousel-slide current-slide">
-              <img src="screenshot.png" alt="Screenshot 1">
-            </li>
-            <li class="carousel-slide">
-              <img src="screenshot.png" alt="Screenshot 2">
-            </li>
-          </ul>
-        </div>
-        <button class="carousel-arrow right-arrow" id="nextBtn">&#10095;</button>
-      </div>
-    </div>
   </div>
 
   <script>
@@ -610,27 +589,29 @@
     checkLogin();
 
     const track = document.querySelector('.carousel-track');
-    const slides = Array.from(track.querySelectorAll('.carousel-slide'));
-    const nextBtn = document.getElementById('nextBtn');
-    const prevBtn = document.getElementById('prevBtn');
-    let currentSlide = 0;
+    if (track) {
+      const slides = Array.from(track.querySelectorAll('.carousel-slide'));
+      const nextBtn = document.getElementById('nextBtn');
+      const prevBtn = document.getElementById('prevBtn');
+      let currentSlide = 0;
 
-    function updateSlides() {
-      slides.forEach((slide, index) => {
-        slide.classList.toggle('current-slide', index === currentSlide);
-      });
-    }
+      function updateSlides() {
+        slides.forEach((slide, index) => {
+          slide.classList.toggle('current-slide', index === currentSlide);
+        });
+      }
 
-    if (nextBtn && prevBtn) {
-      nextBtn.addEventListener('click', () => {
-        currentSlide = (currentSlide + 1) % slides.length;
-        updateSlides();
-      });
+      if (nextBtn && prevBtn) {
+        nextBtn.addEventListener('click', () => {
+          currentSlide = (currentSlide + 1) % slides.length;
+          updateSlides();
+        });
 
-      prevBtn.addEventListener('click', () => {
-        currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-        updateSlides();
-      });
+        prevBtn.addEventListener('click', () => {
+          currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+          updateSlides();
+        });
+      }
     }
   </script>
 </body>
