@@ -471,12 +471,20 @@
 
     window.addEventListener('message', function(event) {
       if (event.data.type === 'DISCORD_AUTH') {
-        console.log('Logged in user:', event.data.user);
-        const welcomeEl = document.getElementById('welcome');
-        welcomeEl.textContent = 'Welcome, ' + event.data.user.username + '!';
-        welcomeEl.style.display = 'block';
+        localStorage.setItem('discord_user', JSON.stringify(event.data.user));
+        location.reload();
       }
     });
+
+    function checkLogin() {
+      const user = JSON.parse(localStorage.getItem('discord_user'));
+      if (user) {
+        document.getElementById('welcome').textContent = 'Welcome, ' + user.username + '!';
+        document.getElementById('welcome').style.display = 'block';
+      }
+    }
+
+    checkLogin();
 
     const track = document.querySelector('.carousel-track');
     const slides = Array.from(track.querySelectorAll('.carousel-slide'));
