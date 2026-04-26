@@ -3,14 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Madokadex</title>
+  <title>Feedback - Madokadex</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    html { margin: 0; padding: 0; }
-    body { margin: 0; padding: 0; min-height: 100vh; background: linear-gradient(180deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); font-family: 'Fredoka One', cursive; overflow-x: hidden; }
+    body { margin: 0; padding: 0; min-height: 100vh; background: linear-gradient(180deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); font-family: 'Fredoka One', cursive; overflow-x: hidden; padding-top: 80px; }
     .navbar { position: fixed; top: 0; left: 0; right: 0; display: flex; justify-content: center; align-items: center; padding: 15px 30px; background: linear-gradient(180deg, rgba(26, 26, 46, 0.95) 0%, rgba(26, 26, 46, 0.8) 100%); backdrop-filter: blur(10px); z-index: 999; border: 2px solid #ff0080; box-shadow: 0 0 20px rgba(255, 0, 128, 0.3); }
     .hamburger { display: flex; flex-direction: column; gap: 5px; cursor: pointer; padding: 10px; position: absolute; left: 30px; }
     .hamburger span { width: 25px; height: 3px; background: #fff; border-radius: 2px; }
@@ -23,24 +22,25 @@
     .sidebar .close-btn { position: absolute; top: 20px; right: 20px; font-size: 2rem; color: #fff; cursor: pointer; }
     .sidebar a { display: block; color: #fff; text-decoration: none; padding: 20px 30px; font-size: 1.3rem; border-bottom: 1px solid rgba(255, 0, 128, 0.2); }
     .sidebar a:hover { background: rgba(255, 0, 128, 0.2); padding-left: 40px; }
-    .hero { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 60px; padding-top: 80px; }
-    .title { font-size: 5rem; color: #fff; text-shadow: 0 0 5px #ff0080, 0 0 10px #ff0080, 2px 2px 0 #c71585; animation: titleFloat 3s ease-in-out infinite; letter-spacing: 4px; }
-    .title span { display: inline-block; animation: letterWobble 2s ease-in-out infinite; }
-    .title span:nth-child(1) { animation-delay: 0s; } .title span:nth-child(2) { animation-delay: 0.15s; } .title span:nth-child(3) { animation-delay: 0.3s; } .title span:nth-child(4) { animation-delay: 0.45s; } .title span:nth-child(5) { animation-delay: 0.6s; } .title span:nth-child(6) { animation-delay: 0.75s; } .title span:nth-child(7) { animation-delay: 0.9s; } .title span:nth-child(8) { animation-delay: 1.05s; } .title span:nth-child(9) { animation-delay: 1.2s; }
-    @keyframes letterWobble { 0%, 100% { transform: rotate(0deg); } 25% { transform: rotate(-3deg) translateY(-2px); } 75% { transform: rotate(3deg) translateY(-2px); } }
+    .content { max-width: 600px; margin: 0 auto; padding: 40px 20px; text-align: center; }
+    .content h1 { font-size: 3rem; color: #fff; text-shadow: 0 0 5px #ff0080, 0 0 10px #ff0080, 2px 2px 0 #c71585; margin-bottom: 10px; animation: titleFloat 3s ease-in-out infinite; }
     @keyframes titleFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
-    .button-container { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; }
-    .btn { position: relative; padding: 20px 45px; font-size: 1.3rem; color: #fff; background: linear-gradient(45deg, #ff0080, #ff6b9d, #c71585, #ff1493); background-size: 300% 300%; border: none; border-radius: 50px; cursor: pointer; transition: transform 0.3s ease, box-shadow 0.3s ease; box-shadow: 0 10px 30px rgba(255, 0, 128, 0.4); animation: gradientMove 3s ease infinite; font-family: 'Fredoka One', cursive; text-decoration: none; display: inline-block; }
-    .btn:hover { transform: scale(1.1); box-shadow: 0 15px 40px rgba(255, 0, 128, 0.6); }
-    .btn:active { transform: scale(0.95); }
+    .content p { font-size: 1.2rem; color: rgba(255, 255, 255, 0.7); margin-bottom: 40px; }
+    .form-container { background: rgba(26, 26, 46, 0.8); border: 2px solid #ff0080; border-radius: 20px; padding: 40px; box-shadow: 0 0 30px rgba(255, 0, 128, 0.3); }
+    .form-group { margin-bottom: 25px; text-align: left; }
+    .form-group label { display: block; color: #fff; font-size: 1.1rem; margin-bottom: 8px; }
+    .form-group input, .form-group textarea, .form-group select { width: 100%; padding: 15px; border: 2px solid rgba(255, 0, 128, 0.3); border-radius: 10px; background: rgba(26, 26, 46, 0.9); color: #fff; font-family: 'Fredoka One', cursive; font-size: 1rem; }
+    .form-group input:focus, .form-group textarea:focus, .form-group select:focus { outline: none; border-color: #ff0080; box-shadow: 0 0 15px rgba(255, 0, 128, 0.3); }
+    .form-group textarea { min-height: 150px; resize: vertical; }
+    .submit-btn { position: relative; padding: 15px 40px; font-size: 1.2rem; color: #fff; background: linear-gradient(45deg, #ff0080, #ff6b9d, #c71585, #ff1493); background-size: 300% 300%; border: none; border-radius: 50px; cursor: pointer; box-shadow: 0 10px 30px rgba(255, 0, 128, 0.4); animation: gradientMove 3s ease infinite; font-family: 'Fredoka One', cursive; }
+    .submit-btn:hover { transform: scale(1.05); box-shadow: 0 15px 40px rgba(255, 0, 128, 0.6); }
     @keyframes gradientMove { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
-    .scroll-text { font-size: 1.2rem; color: rgba(255, 255, 255, 0.5); animation: fadePulse 2s ease-in-out infinite; }
-    @keyframes fadePulse { 0%, 100% { opacity: 0.3; } 50% { opacity: 0.7; } }
+    .success-message { display: none; color: #fff; font-size: 1.5rem; margin-top: 20px; text-shadow: 0 0 10px #ff0080; }
     .sparkles { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; overflow: hidden; z-index: 0; }
     .sparkle { position: absolute; width: 10px; height: 10px; background: #ff69b4; border-radius: 50%; animation: sparkleFloat 4s ease-in-out infinite; opacity: 0; }
     .sparkle:nth-child(1) { left: 10%; animation-delay: 0s; } .sparkle:nth-child(2) { left: 20%; animation-delay: 0.5s; } .sparkle:nth-child(3) { left: 30%; animation-delay: 1s; } .sparkle:nth-child(4) { left: 40%; animation-delay: 1.5s; } .sparkle:nth-child(5) { left: 50%; animation-delay: 2s; } .sparkle:nth-child(6) { left: 60%; animation-delay: 2.5s; } .sparkle:nth-child(7) { left: 70%; animation-delay: 3s; } .sparkle:nth-child(8) { left: 80%; animation-delay: 3.5s; } .sparkle:nth-child(9) { left: 90%; animation-delay: 0.25s; } .sparkle:nth-child(10) { left: 15%; animation-delay: 0.75s; } .sparkle:nth-child(11) { left: 35%; animation-delay: 1.25s; } .sparkle:nth-child(12) { left: 55%; animation-delay: 1.75s; } .sparkle:nth-child(13) { left: 75%; animation-delay: 2.25s; } .sparkle:nth-child(14) { left: 85%; animation-delay: 2.75s; } .sparkle:nth-child(15) { left: 25%; animation-delay: 3.25s; }
     @keyframes sparkleFloat { 0% { transform: translateY(100vh) scale(0); opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { transform: translateY(-100px) scale(1); opacity: 0; } }
-    @media (max-width: 600px) { .title { font-size: 2.5rem; } .btn { padding: 15px 30px; font-size: 1rem; } }
+    @media (max-width: 600px) { .content h1 { font-size: 2rem; } .form-container { padding: 25px; } }
   </style>
 </head>
 <body>
@@ -52,23 +52,37 @@
   <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
   <div class="sidebar" id="sidebar">
     <span class="close-btn" onclick="closeSidebar()">&times;</span>
-    <a href="index.html" class="active">Home</a>
-    <a href="feedback.html">Feedback</a>
+    <a href="index.html">Home</a>
+    <a href="feedback.html" class="active">Feedback</a>
   </div>
   <nav class="navbar">
     <div class="hamburger" onclick="openSidebar()"><span></span><span></span><span></span></div>
     <a href="index.html" class="nav-logo">Madokadex</a>
   </nav>
-  <div class="hero">
-    <h1 class="title">
-      <span>M</span><span>a</span><span>d</span><span>o</span><span>k</span><span>a</span><span>d</span><span>e</span><span>x</span>
-    </h1>
-    <div class="button-container">
-      <a href="https://discord.com/oauth2/authorize?client_id=1494136822018609296&permissions=380104722432&integration_type=0&scope=bot" class="btn" target="_blank" rel="noopener noreferrer">
-        <span>Add the Bot to your<br>Discord server <3</span>
-      </a>
+  <div class="content">
+    <h1>Feedback/bug reports</h1>
+    <p>Kyubey would love if you sent feedback or reported a bug! (and maybe if you made a contract..)</p>
+    <div class="form-container">
+      <form action="https://formspree.io/f/mqewjjko" method="POST">
+        <div class="form-group">
+          <label>Discord username</label>
+          <input type="text" name="discord" placeholder="Your Discord username">
+        </div>
+        <div class="form-group">
+          <label>Type</label>
+          <select name="type" required>
+            <option value="" disabled selected>Select type...</option>
+            <option value="Feedback">Feedback</option>
+            <option value="Bug Report">Bug Report</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Message</label>
+          <textarea name="message" placeholder="Homura would love to hear this!" required></textarea>
+        </div>
+        <button type="submit" class="submit-btn">Send Feedback</button>
+      </form>
     </div>
-    <p class="scroll-text">scroll down :3</p>
   </div>
   <script>
     function openSidebar() { document.getElementById('sidebar').classList.add('open'); document.getElementById('sidebarOverlay').classList.add('open'); }
