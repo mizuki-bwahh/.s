@@ -306,6 +306,22 @@
       100% { transform: translateY(-100px) scale(1); opacity: 0; }
     }
 
+    .footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      text-align: center;
+      padding: 15px;
+      background: linear-gradient(180deg, transparent 0%, rgba(26, 26, 46, 0.9) 100%);
+    }
+
+    .footer p {
+      font-size: 0.75rem;
+      color: rgba(255, 255, 255, 0.4);
+      letter-spacing: 1px;
+    }
+
     @media (max-width: 600px) {
       .carousel-title {
         font-size: 1.8rem;
@@ -426,31 +442,11 @@
       }
     }
 
-    checkLogin();
-
-    const track = document.querySelector('.carousel-track');
-    const slides = Array.from(track.querySelectorAll('.carousel-slide'));
-    const nextBtn = document.getElementById('nextBtn');
-    const prevBtn = document.getElementById('prevBtn');
-    let currentSlide = 0;
-
-    function updateSlides() {
-      slides.forEach((slide, index) => {
-        slide.classList.toggle('current-slide', index === currentSlide);
-      });
-    }
-
-    if (nextBtn && prevBtn) {
-      nextBtn.addEventListener('click', () => {
-        currentSlide = (currentSlide + 1) % slides.length;
-        updateSlides();
-      });
-
-      prevBtn.addEventListener('click', () => {
-        currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-        updateSlides();
-      });
-    }
+checkLogin();
   </script>
+
+  <footer class="footer">
+    <p>© 2026 Madokadex. All rights reserved. || Puella Magi Madoka Magica is created by Magica Quartet</p>
+  </footer>
 </body>
 </html>
