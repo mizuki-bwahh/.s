@@ -431,18 +431,21 @@
     <p>Kyubey would love if you sent feedback or reported a bug! (and maybe if you made a contract..)</p>
 
     <div class="form-container">
-      <form action="mailto:madokadex@gmail.com?subject=Madokadex%20Feedback" method="POST" enctype="text/plain">
+      <form action="https://api.web3forms.com/submit" method="POST">
+        <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE">
+        <input type="hidden" name="subject" value="Madokadex Feedback">
+        <input type="hidden" name="from_name" value="Madokadex Website">
         
         <div class="form-group">
           <label for="discord">Discord username</label>
-          <input type="text" id="discord" name="Discord%20Username" placeholder="Your Discord username">
+          <input type="text" id="discord" name="Discord Username" placeholder="Your Discord username">
         </div>
 
         <div class="form-group">
           <label for="type">Type</label>
           <select id="type" name="type" required>
             <option value="Feedback">Feedback</option>
-            <option value="Bug%20Report">Bug Report</option>
+            <option value="Bug Report">Bug Report</option>
           </select>
         </div>
 
