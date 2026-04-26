@@ -414,10 +414,6 @@
     <a href="index.html">Home</a>
     <a href="page.html" class="active">Feedback</a>
     <a href="community.html">Community</a>
-    <div class="user-section" id="userSection" style="display: none;">
-      <div class="avatar" id="avatar">?</div>
-      <div class="username" id="sidebar-username">...</div>
-    </div>
   </div>
 
   <nav class="navbar">
@@ -435,23 +431,18 @@
     <p>Kyubey would love if you sent feedback or reported a bug! (and maybe if you made a contract..)</p>
 
     <div class="form-container">
-      <form name="feedback" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/?success=true">
-        <input type="hidden" name="form-name" value="feedback">
-        <p style="display: none;">
-          <label>Don't fill this out: <input name="bot-field"></label>
-        </p>
-
+      <form action="mailto:madokadex@gmail.com?subject=Madokadex%20Feedback" method="POST" enctype="text/plain">
+        
         <div class="form-group">
           <label for="discord">Discord username</label>
-          <input type="text" id="discord" name="discord" placeholder="Your Discord username" readonly>
+          <input type="text" id="discord" name="Discord%20Username" placeholder="Your Discord username">
         </div>
 
         <div class="form-group">
           <label for="type">Type</label>
           <select id="type" name="type" required>
-            <option value="" disabled selected>Select type...</option>
             <option value="Feedback">Feedback</option>
-            <option value="Bug Report">Bug Report</option>
+            <option value="Bug%20Report">Bug Report</option>
           </select>
         </div>
 
@@ -462,8 +453,6 @@
 
         <button type="submit" class="submit-btn">Send Feedback</button>
       </form>
-
-      <p class="success-message" id="successMessage">Thanks for your feedback! <3</p>
     </div>
   </div>
 
@@ -477,19 +466,6 @@
       document.getElementById('sidebar').classList.remove('open');
       document.getElementById('sidebarOverlay').classList.remove('open');
     }
-
-    function checkLogin() {
-      const user = JSON.parse(localStorage.getItem('discord_user'));
-      if (user) {
-        const initial = user.username.charAt(0).toUpperCase();
-        document.getElementById('avatar').textContent = initial;
-        document.getElementById('sidebar-username').textContent = user.username;
-        document.getElementById('userSection').style.display = 'block';
-        document.getElementById('discord').value = user.username;
-      }
-    }
-
-checkLogin();
   </script>
 </body>
 </html>
